@@ -120,7 +120,7 @@ void arguements(int argc, char **argv)
 }
 
 
-int noarguements(){
+int get_empty(){
 	if (empty == 1){
 		return 1;
 	}
@@ -129,7 +129,7 @@ int noarguements(){
 	}
 }
 
-int unacceptedinput(){
+int get_unaccepted(){
 	if (unaccepted ==1){
 		return 1;
 	}
@@ -138,12 +138,43 @@ int unacceptedinput(){
 	}
 }
 
-int getPid(){
+int get_pid(){
+	return pid;
+}
+
+int get_provided_pid(){
 	return provided_pid;
+}
+
+int get_anything_but_p(){
+	return anything_but_p;
+}
+
+int get_contain_c(){
+	return contain_c;
+}
+
+int get_contain_S(){
+	return contain_S;
+}
+
+int get_contain_U(){
+	return contain_U;
+}
+
+int get_contain_s(){
+	return contain_s;
+}
+
+int get_contain_p(){
+	return contain_p;
 }
 
 
 int main(int argc, char **argv){
 	arguements(argc, argv);
 	printf("\n unaccepted %d", unaccepted);
+	printf("\n provided_pid %d", provided_pid);
+	printf("\n pid %d", pid);
+	printf("\n anything but p %d", anything_but_p);
 }
