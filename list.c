@@ -29,8 +29,9 @@ int main()
 	int id = getuid();
 	printf("\n%d\n", id);
 	
+	// TO DO
 	// Iterate through /proc
-	
+	// Scan status file and match userID
 	int count = 0;
 	while((dirp = readdir(dir)) != NULL){
 		if(!isdigit(*dirp->d_name))
@@ -38,6 +39,8 @@ int main()
 		
 
 		pid = strtol(dirp->d_name, NULL, 10);
+		
+		// This print is for testing purposes only
 		printf("%li ", pid);
 		if(count == 20){
 			printf("\n");
