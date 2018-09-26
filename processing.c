@@ -13,9 +13,9 @@ int unaccepted = 0;
 int pid = 0;
 int provided_pid = 0;
 int anything_but_p = 0;
-int contain_c = 0;
+int not_contain_c = 0;
 int contain_S = 0;
-int contain_U = 0;
+int not_contain_U = 0;
 int contain_s = 0;
 int contain_p = 0;
 
@@ -33,13 +33,14 @@ void arguements(int argc, char **argv)
 				//checks for accepted arguements
 				switch(argv[i][1]){
 					
-					
+					//checks for case P
 					case 'p':
+						//checks to see if anything after the p
 						if (argv[i][2] == '\0'){
 							if (i < argc-1){
+								//if there is then get the PID 
 								i++;
 								pid = atoi(argv[i]);
-								printf("%d", pid);
 								if (pid == 0){
 									unaccepted = 1;
 								}
@@ -56,7 +57,7 @@ void arguements(int argc, char **argv)
 							unaccepted = 1;
 						}
 						break;
-						
+					//checks for case s	
 					case 's':
 						if (argv[i][2] == '\0'){
 							contain_s = 1;
@@ -69,20 +70,22 @@ void arguements(int argc, char **argv)
 							unaccepted = 1;
 						}
 						break;
-						
+					//checks for case U
 					case 'U':
 						if (argv[i][2] == '\0'){
-							contain_U = 1;
-							anything_but_p = 1;
+							
 						}
 						else if ( argv[i][2] == '-'){
-							
+							if (argv[i][3] == '\0'){
+								not_contain_U = 1;
+								anything_but_p = 1;	
+							}
 						}
 						else{
 							unaccepted = 1;
 						}
 						break;
-						
+					//checks for case S	
 					case 'S':
 						if (argv[i][2] == '\0'){
 							contain_S = 1;
@@ -95,14 +98,16 @@ void arguements(int argc, char **argv)
 							unaccepted = 1;
 						}
 						break;
-						
+					//checks for case c	
 					case 'c':
 						if (argv[i][2] == '\0'){
-							contain_c = 1;
-							anything_but_p = 1;
+							
 						}
 						else if ( argv[i][2] == '-'){
-							
+							if (argv[i][3] == '\0'){
+								not_contain_c = 1;
+								anything_but_p = 1;
+							}
 						}
 						else{
 							unaccepted = 1;
@@ -138,6 +143,8 @@ int get_unaccepted(){
 	}
 }
 
+
+//functions to get variable values 
 int get_pid(){
 	return pid;
 }
@@ -150,16 +157,16 @@ int get_anything_but_p(){
 	return anything_but_p;
 }
 
-int get_contain_c(){
-	return contain_c;
+int get_not_contain_c(){
+	return not_contain_c;
 }
 
 int get_contain_S(){
 	return contain_S;
 }
 
-int get_contain_U(){
-	return contain_U;
+int get_not_contain_U(){
+	return not_contain_U;
 }
 
 int get_contain_s(){
@@ -170,7 +177,7 @@ int get_contain_p(){
 	return contain_p;
 }
 
-
+//main function for testing purposes
 int main(int argc, char **argv){
 	arguements(argc, argv);
 	printf("\n unaccepted %d", unaccepted);
