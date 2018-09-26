@@ -11,18 +11,25 @@
 char* state_info;
 struct dirent *myFile;
 char* random;
+const int path_size = 80;
 
 char* stat_U(char* PID){
 	
-	char* path;
-	char* str1;
-	char* str2;
-	char* str3;
-	char* str4;
+	char* path[80];
+	char* str[80];
 	
-	sprintf(path, "/Proc/%s", PID);
+	sprintf(path, "/proc/%s/stat", PID);
+	printf("%s\n", path);
 	FILE* fp = fopen(path, "r");
-	fscanf(fp, "%s %s %s %s", str1, str2, str3, str4);
+	if (fp == NULL){
+		//printf("error\n");
+	}
+	for (int i = 0; i<=13; i++){
+		printf("%d\n",i);
+		fscanf(fp, "%s", str);
+	}
+	printf("%s\n", str);
+	
 	
 	
 	return state_info;
@@ -33,7 +40,9 @@ char* stat_U(char* PID){
 
 int main(int argc, char **argv)
 {
-	
+	char* PID= "515";
+	printf("%s\n", PID);
+	stat_U(PID);
 	return 0;
 }
 
