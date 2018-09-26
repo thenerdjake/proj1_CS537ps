@@ -17,6 +17,9 @@
 // Function declarations
 char Search(int name);
 int ScanFile();
+int id = -1;
+int match = 0;
+int userProc[BUFSIZE];
 
 //probaby turn this into a header file, or function to a .h file
 //tempory main
@@ -34,13 +37,13 @@ int main()
 
 	
 	// Get user id
-	int id = getuid();
+	id = getuid();
 	printf("\n%d\n", id);
 	
 	// TO DO
 	// Iterate through /proc
 	// Scan status file and match userID
-	int subd[BUFSIZE];
+	//int subd[BUFSIZE];
 	int index = 0;
 
 	while((dirp = readdir(dir)) != NULL){
@@ -49,31 +52,36 @@ int main()
 		
 		// store all processes folders into char array
 		pid = strtol(dirp->d_name, NULL, 10);
-		subd[index] = pid;
+	//	subd[index] = pid;
 		index++;
 
 		printf("\nEntering Search()\n");
 		char a = Search(pid);
 
 		// This print is for testing purposes only
-		printf("%li ", pid);
-		if(index % 10 == 0){
-			printf("\n");
-		}
+//		printf("%li ", pid);
+//		if(index % 10 == 0){
+//			printf("\n");
+//		}
 	}
+//
+//	// check char array contents
+////	printf("\n-----------------------------------------------\n");
+//	for(int i = 0; i < index; i++){
+//			if(i%10 == 0 && i > 0)
+//				printf("\n");
+//			
+//			printf("%d ", subd[i]);
+//		}
+//
+//	printf("\n");
+	
+	printf("%d\n", match);
 
-	// check char array contents
-	printf("\n-----------------------------------------------\n");
-	for(int i = 0; i < index; i++){
-			if(i%10 == 0 && i > 0)
-				printf("\n");
-			
-			printf("%d ", subd[i]);
-		}
+	for(int i = 0; i < match; i++)
+		printf("%d ", userProc[i]);
 
 	printf("\n");
-	
-
 
 	closedir(dir);
 	return 0;
@@ -82,27 +90,41 @@ int main()
 // Go through each /proc process subdirectory and open status file
 char Search(int name){
 	char path[256];
-	char filepath[256];
-
+	//char filepath[256];
 
 	sprintf(path, "/proc/%d", name);
-	
+
 	// Code below needs debugging
-	DIR *dp = opendir(path);
+	DIR *dp = opendir("/proc/1");
 	if(dp == NULL){
 		printf("\nFailed to open subdirectory\n");
 	}
-
+	
 	struct dirent *ent;
 	char word[1024];
 	while((ent = readdir(dp)) != NULL){
+
 		if(strcmp(ent->d_name, "status") == 0){
 			// open the status file
-			scanf(filepath, "/proc/%s/status", ent->d_name);
-			FILE *fp = fopen(filepath, "r");
+			strcat(path, "/status");
+
+			FILE *fp = fopen(path, "r");
+			if(fp == NULL){
+				printf("\nFailed to open file\n");
+				exit(1);
+			}
 			// Scan file userID
-			while(fscanf(fp, "%1023s", word)){
-				puts(word);
+			int num1 = -1;
+			while(fscanf(fp, "%1023s", word) == 1) {
+				if(strcmp(word, "Uid:") == 0){
+					fscanf(fp, "%d", &num1);
+					printf("%d\n", num1);
+					
+					if(num1 == id){
+						userProc[match] = name;
+						match++;
+					}
+				}
 			}
 		}
 
