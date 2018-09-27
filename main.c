@@ -6,11 +6,14 @@
 
 
 int main(int c, char **argv){
+	//figure out what the use wants
 	arguments(c, argv);
+	//be prepared to tell the user you can't do what they want
 	if (get_unaccepted()){
 		printf("I'm sorry but that input isn't accepted\n");
 		return 1;
 	}
+	//if they give you a pid only give them info on that pid
 	if (get_contain_p()){
 		if(get_provided_pid()){
 			int PID = get_pid();
@@ -46,7 +49,7 @@ int main(int c, char **argv){
 			return 1;
 		}
 	}
-	
+	//if no p given print all that stuff out, still follow arguements though
 	int *p = List("/proc");
 	if (!get_contain_p()){
 		for(int i = 0; i < Size(); i++){
