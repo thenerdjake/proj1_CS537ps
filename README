@@ -1,0 +1,11 @@
+Names: Jake Braun and Dan Xiao
+Source files: list.c, parser.c, processing.c, main.c
+Other files: list.h, parser.h, processing.h Makefile
+
+We divided the program into 3 modules and header files that contained function
+prototypes that were declared in the modules. Processing.c took care of reading
+from the command line and identifying what output was needed from the given
+input.  list.c iterated through the /proc directory and returned a pointer to an
+array that contained the ID to user processes.  parser.c extracted strings from
+the stat, statm, and cmdline files.  All these files were linked with main to
+print output to console.
