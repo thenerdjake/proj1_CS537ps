@@ -10,14 +10,9 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <string.h>
+#include "list.h"
 
-#define BUFSIZE 1000	
-
-// Function declarations
-void Search(int name);
-int* List();
-int Size();
-
+// Globals
 static int id = -1;
 static int match = 0;
 static int userProc[BUFSIZE];
@@ -58,7 +53,7 @@ int* List()
 		if(!isdigit(*dirp->d_name))
 			continue;
 		
-		// store all processes folders into char array
+		// Store all processes folders into char array
 		pid = strtol(dirp->d_name, NULL, 10);
 		// Check for user process
 		Search(pid);
@@ -70,8 +65,7 @@ int* List()
 }
 
 /*
- * No return value
- * Instead iterates through the subdirectories of /proc and opens the status file.
+ * Iterates through the subdirectories of /proc and opens the status file.
  * Checks the userID line within the status file and matches it to current user
  * ID.  Adds the processNum to an array if userID and ID match.
  *
