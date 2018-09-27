@@ -7,7 +7,7 @@
 /* Defined in list.c */
 
 // Returns an int pointer
-int* List();
+int* List(char *str);
 
 // Take take in int paramter to be added in as filepath 
 void Search(int processNum);
