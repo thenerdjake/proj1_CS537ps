@@ -49,13 +49,25 @@ char* stat_s(int PID){
 	return state;
 }
 
+int stat_S(int PID){
+	sprintf(path, "/proc/%d/stat", PID);
+	FILE* fp = fopen(path, "r");
+	if (fp == NULL){
+		//printf("error\n");
+	}
+	fscanf(fp, "%*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %s", str);
+	clock = atoi(str);
+	printf("%d\n", clock);
+	return clock;
+}
+
 
 
 int main(int argc, char **argv)
 {
 	int PID= 519;
 	//printf("%d\n", PID);
-	stat_s(PID);
+	stat_S(PID);
 	return 0;
 }
 
