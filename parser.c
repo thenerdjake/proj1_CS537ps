@@ -19,11 +19,12 @@ int clock;
 char* time[80];
 char path[80];
 char str[80];
+char state[1];
 
-int stat_U(char* PID){
+int stat_U(int PID){
 	
 	
-	sprintf(path, "/proc/%s/stat", PID);
+	sprintf(path, "/proc/%d/stat", PID);
 	//printf("%s\n", path);
 	FILE* fp = fopen(path, "r");
 	if (fp == NULL){
@@ -40,14 +41,21 @@ int stat_U(char* PID){
 	return clock;
 }
 
+char* stat_s(int PID){
+	sprintf(path, "/proc/%d/stat", PID);
+	FILE* fp = fopen(path, "r");
+	fscanf(fp, "%*s %*s %s", state);
+	printf("%s\n", state);
+	return state;
+}
 
 
 
 int main(int argc, char **argv)
 {
-	char* PID= "519";
-	//printf("%s\n", PID);
-	stat_U(PID);
+	int PID= 519;
+	//printf("%d\n", PID);
+	stat_s(PID);
 	return 0;
 }
 
