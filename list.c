@@ -15,16 +15,30 @@
 
 // Function declarations
 void Search(int name);
-int ScanFile();
-
+int* List();
+int Size();
 
 static int id = -1;
 static int match = 0;
 static int userProc[BUFSIZE];
 
-//probaby turn this into a header file, or function to a .h file
-//tempory main
-int main()
+int main(){
+	int *p = List();
+
+	for(int i = 0; i < match; i++){
+		printf("%d ", *(p + i));
+	}
+	printf("\n");	
+
+	return 0;
+}
+
+/*
+ * Returns an integer pointer
+ *
+ * @return The address location of an int array
+ */
+int* List()
 {
 	DIR *dir = opendir("/proc");
 	struct dirent* dirp;
@@ -50,12 +64,9 @@ int main()
 		Search(pid);
 	}
 	
-	for(int i = 0; i < match; i++)
-		printf("%d ", userProc[i]);
-	printf("\n");
-
+	int *list = userProc;
 	closedir(dir);
-	return 0;
+	return list;
 }
 
 /*
@@ -108,4 +119,11 @@ void Search(int processNum){
 	}
 	fclose(fp);
 	closedir(dp);
+}
+
+/*
+ * @return Returns the size of userProc
+ */
+int Size(){
+	return match;
 }
