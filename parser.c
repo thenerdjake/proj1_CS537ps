@@ -13,9 +13,6 @@
 char* state_info;
 struct dirent *myFile;
 const int path_size = 80;
-int sec;
-int min;
-int hour;
 int clock;
 char* time[80];
 char path[80];
@@ -66,7 +63,7 @@ int stat_v(int PID){
 	fscanf(fp, "%s", str);
 	//convert it to int
 	size = atoi(str);
-	return clock;
+	return size;
 }
 
 char* stat_c(int PID){
