@@ -1,3 +1,21 @@
+////////////////////////////////////////////////////////////////////////////////
+// Title:            537ps
+// Files:            list.c parser.c processing.c main.c
+// Semester:         CS537
+//
+// Author:           Dan Xiao
+// Email:            dfxiao@wisc.edu
+// CS Login:         dxiao
+// Lecturer's Name:  Barton Miller
+//
+///////////////////////////////////////////////////////////////////////////////
+//
+// Pair Partner:     Jake Braun
+// Email:            jbraun6@wisc.edu
+// CS Login:         braun
+// Lecturer's Name:  Barton Miller
+//
+////////////////////////////////////////////////////////////////////////////////
 /*
  * parser.c
  * 
