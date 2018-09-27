@@ -17,17 +17,6 @@ static int id = -1;
 static int match = 0;
 static int userProc[BUFSIZE];
 
-int main(){
-	int *p = List("/proc");
-
-	for(int i = 0; i < match; i++){
-		printf("%d ", *(p + i));
-	}
-	printf("\n");	
-
-	return 0;
-}
-
 /*
  * Opens a directory and iterates through it. 
  * Returns an integer pointer.
