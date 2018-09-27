@@ -114,3 +114,13 @@ void stat_c(int PID){
 		buff += strlen (buff) + 1;
 	}
 }
+
+int exist_PID(int PID){
+	sprintf(path, "/proc/%d", PID);
+	if( access( path, F_OK ) != -1 ){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}

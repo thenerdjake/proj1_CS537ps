@@ -30,4 +30,7 @@ int stat_v(int PID);
 //used in the c argument
 void stat_c(int PID);
 
+//returns 1 if the PID exists in /proc, a zero otherwise
+int exist_PID(int PID);
+
 #endif

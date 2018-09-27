@@ -77,17 +77,19 @@ void arguments(int argc, char **argv)
 						if (argv[i][2] == '\0'){
 							
 						}
-						else if ( argv[i][2] == '-'){
-							if (argv[i][3] == '\0'){
-								not_contain_U = 1;
-								anything_but_p = 1;	
+						else {
+							if ( argv[i][2] == '-'){
+								if (argv[i][3] == '\0'){
+									not_contain_U = 1;
+									anything_but_p = 1;	
+								}
+								else{
+									unaccepted =1;
+								}
 							}
 							else{
-								unaccepted =1;
+								unaccepted = 1;
 							}
-						}
-						else{
-							unaccepted = 1;
 						}
 						break;
 					//checks for case S	

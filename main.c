@@ -15,6 +15,10 @@ int main(int c, char **argv){
 		if(get_provided_pid()){
 			int PID = get_pid();
 			if (PID <= 0){
+				printf("That PID doesn't exist\n");
+				return 1;
+			}
+			if (!exist_PID(PID)){
 				printf("please provide a real PID, thank you\n");
 				return 1;
 			}
