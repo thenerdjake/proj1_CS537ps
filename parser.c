@@ -106,12 +106,12 @@ void stat_c(int PID){
 	sprintf(path, "/proc/%d/cmdline", PID);
 	FILE* fp = fopen(path, "r");
 	//read in to buffer from the file and output length
-	length = fread(cmd, sizeof(char), 100, fp);
+	length = fread(cmd, sizeof(char), 1000, fp);
 	buff = cmd;
 	//copy that buffer
-	while (buff < cmd + length){
-		printf("%s ", buff);
-		buff += strlen (buff) + 1;
+	while (buff <cmd +length){
+		printf("%s ",buff);
+		buff+=strlen (buff) +1;
 	}
 }
 
