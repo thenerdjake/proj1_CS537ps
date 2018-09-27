@@ -20,6 +20,7 @@ char* time[80];
 char path[80];
 char str[80];
 char state[1];
+int size;
 
 int stat_U(int PID){
 	
@@ -30,9 +31,7 @@ int stat_U(int PID){
 	if (fp == NULL){
 		//printf("error\n");
 	}
-	for (int i = 0; i<=13; i++){
-		fscanf(fp, "%s", str);
-	}
+	fscanf(fp, "%*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %*s %s", str);
 	//printf("%s\n", str);
 	clock = atoi(str);
 	//printf("%d\n", sysconf(_SC_CLK_TCK));
@@ -61,13 +60,24 @@ int stat_S(int PID){
 	return clock;
 }
 
+int stat_v(int PID){
+	sprintf(path, "/proc/%d/statm", PID);
+	FILE* fp = fopen(path, "r");
+	if (fp == NULL){
+		//printf("error\n");
+	}
+	fscanf(fp, "%s", str);
+	size = atoi(str);
+	return clock;
+}
+
 
 
 int main(int argc, char **argv)
 {
 	int PID= 519;
 	//printf("%d\n", PID);
-	stat_S(PID);
+	stat_v(PID);
 	return 0;
 }
 
