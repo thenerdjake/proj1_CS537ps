@@ -2,7 +2,7 @@
 #define __PARSER_H__
 
 #define BUFSIZE 1000
-
+#define BUFFER 80
 
 /* Defined in parser.c */
 

@@ -9,17 +9,18 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <string.h>
+#include "parser.h"
 
 char* state_info;
 struct dirent *myFile;
-const int path_size = 80;
+const int path_size = BUFFER;
 int clock;
-char* time[80];
-char path[80];
-char str[80];
+char* time[BUFFER];
+char path[BUFFER];
+char str[BUFFER];
 char state[1];
 int size;
-char cmd[1000];
+char cmd[BUFSIZE];
 
 //the U option
 int stat_U(int PID){
@@ -35,6 +36,13 @@ int stat_U(int PID){
 	return clock;
 }
 
+/*
+ * Takes int PID as filepath and returns third string from stat file
+ *
+ * @param The PID to lookup
+ *
+ * @return Returns the state of process matching PID
+ */
 char* stat_s(int PID){
 	//creating path to stat with given PID
 	sprintf(path, "/proc/%d/stat", PID);
@@ -44,6 +52,13 @@ char* stat_s(int PID){
 	return state;
 }
 
+/*
+ * Takes int PID as filepath and returns the "stime" of process
+ *
+ * @param The PID to lookup
+ *
+ * @return Returns the total system up time of process matching PID
+ */
 int stat_S(int PID){
 	//creating path to stat with given PID
 	sprintf(path, "/proc/%d/stat", PID);
@@ -55,6 +70,13 @@ int stat_S(int PID){
 	return clock;
 }
 
+/*
+ * Takes PID as filepath and returns vitual memory size of process
+ *
+ * @param The PID to lookup
+ *
+ * @return The vitual memory size of process matching PID
+ */
 int stat_v(int PID){
 	//creating path to statm with given PID
 	sprintf(path, "/proc/%d/statm", PID);
@@ -66,6 +88,13 @@ int stat_v(int PID){
 	return size;
 }
 
+/*
+ * Takes PID as filepath and returns the command-line that started process
+ *
+ * @param The PID to lookup
+ *
+ * @return The command-line that started process matching PID
+ */
 char* stat_c(int PID){
 	size_t length;
 	char* buff;
@@ -82,12 +111,3 @@ char* stat_c(int PID){
 	}
 	return cmd;
 }
-
-//testing main
-int main(int argc, char **argv)
-{
-	int PID= 515;
-	stat_c(PID);
-	return 0;
-}
-
