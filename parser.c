@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <string.h>
 
 char* state_info;
 struct dirent *myFile;
@@ -21,6 +22,7 @@ char path[80];
 char str[80];
 char state[1];
 int size;
+char cmd[1000];
 
 int stat_U(int PID){
 	
@@ -71,13 +73,28 @@ int stat_v(int PID){
 	return clock;
 }
 
-
+char* stat_c(int PID){
+	sprintf(path, "/proc/%d/cmdline", PID);
+	FILE* fp = fopen(path, "r");
+	if (fp == NULL){
+		//printf("error\n");
+	}
+	size_t length;
+	char* buff;
+	length = fread(cmd, sizeof(char), 100, fp);
+	buff = cmd;
+	while (buff < cmd + length){
+		printf("%s ", buff);
+		buff += strlen (buff) + 1;
+	}
+	return cmd;
+}
 
 int main(int argc, char **argv)
 {
-	int PID= 519;
+	int PID= 515;
 	//printf("%d\n", PID);
-	stat_v(PID);
+	stat_c(PID);
 	return 0;
 }
 
