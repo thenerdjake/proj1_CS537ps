@@ -22,7 +22,12 @@ char state[1];
 int size;
 char cmd[BUFSIZE];
 
-//the U option
+/*Takes int PID as filepath and returns 14th string from stat file
+ * 
+ * @param the PID to lookup
+ * 
+ * @return the utime of process matching PID
+ */
 int stat_U(int PID){
 	//creating the path to stat with the given PID
 	sprintf(path, "/proc/%d/stat", PID);
@@ -89,13 +94,12 @@ int stat_v(int PID){
 }
 
 /*
- * Takes PID as filepath and returns the command-line that started process
+ * Takes PID as filepath and prints the command-line that started process
  *
  * @param The PID to lookup
- *
- * @return The command-line that started process matching PID
+
  */
-char* stat_c(int PID){
+void stat_c(int PID){
 	size_t length;
 	char* buff;
 	//creating path to cmdline with given PID
@@ -109,5 +113,4 @@ char* stat_c(int PID){
 		printf("%s ", buff);
 		buff += strlen (buff) + 1;
 	}
-	return cmd;
 }
