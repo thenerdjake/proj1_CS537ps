@@ -1,9 +1,5 @@
 #
-<<<<<<< HEAD
-# New makefile based on the sample makefile,this file is now updated to include the commands to run the Clang Static Analyzer
-=======
-# Sample makefile updated to include the commands to run the Clang Static Analyzer
->>>>>>> a2f8fc5630780c9400bb675bb9893900f981e73e
+# Updates makefile based on the sample makefile,this file is updated to include the commands to run the Clang Static Analyzer
 #
 #    scan-build will "make" your program and run CSA at the same time.
 #
