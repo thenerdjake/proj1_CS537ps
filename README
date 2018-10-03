@@ -1,5 +1,6 @@
 Names: Jake Braun and Dan Xiao
 Source files: list.c, parser.c, processing.c, main.c
+Other files: list.h, parser.h, processing.h Makefile partner.txt
 Other files: list.h, parser.h, processing.h Makefile
 
 We divided the program into 3 modules and header files that contained function
@@ -9,3 +10,10 @@ input.  list.c iterated through the /proc directory and returned a pointer to an
 array that contained the ID to user processes.  parser.c extracted strings from
 the stat, statm, and cmdline files.  All these files were linked with main to
 print output to console.
+
+UPDATE:
+Makefile now runs CSA (Clang Static Analyzer). CSA will display messages to
+console and print out any errors and warnings that may be present in the main
+program.
+partner.txt has been added to include CS login and netid information of target
+students.  
